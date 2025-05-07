@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 const Card = (props) => {
   return (
-    <div className={`bg-white rounded-2xl shadow-2xl flex flex-col justify-center items-center space-y-3 w-[400px] p-4 ${props.readmore=='true'?'text-left':'text-center'} ${props.lr=='true'?'relative':''}`}>
+    <div className={`bg-white rounded-2xl shadow-2xl flex flex-col justify-center items-center space-y-3 max-w-[400px] p-4 ${props.readmore=='true'?'text-left':'text-center'} ${props.lr=='true'?'relative':''}`}>
         {props.img && <Image src={props.img} alt='home' width={3} height={2} layout='responsive' className='rounded-md'/>}
         <p className='text-2xl font-bold text-[var(--primary-color)]'>{props.text1}</p>
         {props.role && <p className='text-[var(--secondary-color)] font-bold'>{props.role}</p>}

@@ -65,12 +65,15 @@ const HoriCaraousel = (props) => {
   const data=reasonMap[props.reason];
   if (!data) return <div>No data found for "{props.reason}"</div>;
   return (
-    <div className="flex flex-col justify-center items-center bg-teal-300/10 backdrop-blur-md border border-teal-500/20 rounded-xl mt-20 overflow-x-auto gap-4 p-4 w-screen h-auto shadow-xl scroll-smooth">
-      <h1 className='text-5xl font-bold text-[var(--primary-color)]'>{props.heading}</h1>
-      <div className='flex justify-center overflow-x-hidden gap-4 p-4 w-max h-auto animate-scroll-loop hover:animate-scroll-loop'>
-        {[...data,...data].map((item, index)=>(
-          <Card img={item.img} text1={item.text1} text2={item.text2} role={item.role} key={`${item.key}-${index}`} readmore={props.reason=='blogposts1' || props.reason=='blogposts2' || props.reason=='blogposts3'?'true':'false'}/>
-        ))}
+    <div className="flex flex-col justify-center items-center bg-teal-400/10 backdrop-blur-md border border-teal-500/20 rounded-xl mt-20 gap-4 p-4 w-screen h-auto shadow-xl">
+      <h1 className='text-5xl font-bold text-[var(--primary-color)] w-full text-center'>{props.heading}</h1>
+      
+      <div className='w-full overflow-x-auto scroll-smooth scrollbar-hide'>
+        <div className='flex justify-center overflow-x-hidden gap-4 p-4 w-max h-auto animate-scroll-loop hover:animate-scroll-loop'>
+          {[...data,...data].map((item, index)=>(
+            <Card img={item.img} text1={item.text1} text2={item.text2} role={item.role} key={`${item.key}-${index}`} readmore={props.reason=='blogposts1' || props.reason=='blogposts2' || props.reason=='blogposts3'?'true':'false'}/>
+          ))}
+        </div>
       </div>
       
     </div>

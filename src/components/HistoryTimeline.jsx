@@ -17,16 +17,25 @@ const RightIcon=iconMap['rightIcon']
 
 const HistoryTimeline = () => {
   return (
-    <div className='relative overflow-x-hidden ml-30 mt-20 mb-20 rounded-2xl'>
-        <h1 className='relative text-[var(--primary-color)] font-bold md:text-6xl mb-20 left-[30%] sm:left-0 sm:text-5xl sm:text-center'>Our History</h1>
-        <div className="absolute top-30 left-[43.2%] w-[6px] h-0 bg-[var(--secondary-color)] z-[-1] animate-move-line rounded-4xl"></div>
-        {milestones.map((item, index)=>(
-            <div key={index} className={`relative p-3 bg-teal-600/20 backdrop-blur-md border border-teal-500/20 rounded-xl w-max ${index%2==0?'left-[7%]':'left-[49%]'}`}>
-                {index%2==0?<LeftIcon className='text-transparent bg-[var(--primary-color)] rounded-[50%] w-[40px] absolute right-[-100px] top-[32px] z-10'/>
-                :<RightIcon className='text-transparent bg-[var(--primary-color)] rounded-[50%] w-[40px] absolute top-[32px] z-10 left-[-100px]'/>}
-                <Card text1={item.title} text2={item.description} role={item.year} lr='true'/>
-            </div>
-        ))}
+    <div className='relative overflow-x-hidden mt-20 mb-20 px-4'>
+        <h1 className='text-[var(--primary-color)] font-bold text-center text-4xl sm:text-5xl md:text-6xl mb-20'>Our History</h1>
+
+        <div className="absolute top-30 left-1/2 transform -translate-x-1/2 w-[4px] h-full bg-[var(--secondary-color)] z-[-1] rounded-4xl animate-move-line"></div>
+        <div className="flex flex-col gap-4">
+          {milestones.map((item, index)=>(
+              <div 
+                key={index} 
+                className={`relative flex w-full ${index%2===0?'justify-start':'justify-end'}`}>
+                  {index%2==0?
+                    <LeftIcon className='bg-[var(--primary-color)] text-transparent rounded-full w-10 h-10 absolute left-[47%] md:left-[48.60%]'/>
+                  :<RightIcon className='bg-[var(--primary-color)] text-transparent rounded-full w-10 h-10 absolute right-[47%] md:left-[48.60%]'/>}
+
+                  <div className={`flex justify-center items-center bg-teal-600/20 backdrop-blur-md border border-teal-500/20 rounded-xl max-w-[450px] w-auto sm:w-[45%] p-4 ${index % 2 === 0 ? 'ml-6':'mr-6'} `}>
+                    <Card text1={item.title} text2={item.description} role={item.year} lr='true'/>
+                  </div>
+              </div>
+          ))}
+        </div>
     </div>
   )
 }

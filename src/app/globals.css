@@ -10,7 +10,7 @@
     transform: translateX(0);
   }
   100% {
-    transform: translateX(calc(-50% - 8px));
+    transform: translateX(-50%);
   }
 }
   
@@ -37,4 +37,12 @@
 
 .animate-move-line{
   animation: move-line 6s linear forwards;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE & Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;             /* Chrome, Safari, Opera */
 }
