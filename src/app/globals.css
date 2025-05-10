@@ -35,7 +35,7 @@
   }
 }
 
-.animate-move-line{
+[data-aos='move-line']{
   animation: move-line 6s linear forwards;
 }
 

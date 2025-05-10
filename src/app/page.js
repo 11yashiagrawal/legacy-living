@@ -1,12 +1,25 @@
+'use client';
 import React from 'react'
 import Hero from '../components/Hero'
 import HoriCaraousel from '@/components/HoriCaraousel'
 import SectionCard from '@/components/SectionCard'
 import SearchBar from '@/components/SearchBar'
-import { iconMap } from '@/components/IconMap'
-import { HomeModernIcon, HeartIcon } from '@heroicons/react/24/solid';
+import { useEffect } from 'react';
+import 'aos/dist/aos.css';
 
 const homepage = () => {
+  useEffect(() => {
+    const AOS = require('aos'); // Import AOS library
+    AOS.init({ duration: 1000, once: false }); // Initialize AOS with optional settings
+
+    AOS.refresh();
+    setTimeout(() => {
+      window.scrollBy(0, 1);
+      window.scrollBy(0, -1);
+      AOS.refresh();
+    }, 100);
+  }, []);
+
   return (
     <div>
       <SearchBar icon='search'/>

@@ -1,6 +1,7 @@
 import React from 'react'
 import Card from './Card'
 import { iconMap } from './IconMap';
+import ScrollLine from './ScrollLine';
 
 const milestones = [
     { year: '2019', title: 'Legacy Living Founded', description: 'Our journey began with a vision to redefine modern real estate.' },
@@ -18,19 +19,18 @@ const RightIcon=iconMap['rightIcon']
 const HistoryTimeline = () => {
   return (
     <div className='relative overflow-x-hidden mt-20 mb-20 px-4'>
-        <h1 className='text-[var(--primary-color)] font-bold text-center text-4xl sm:text-5xl md:text-6xl mb-20'>Our History</h1>
+        <h1 className='text-[var(--primary-color)] font-bold text-center text-4xl sm:text-5xl md:text-6xl mb-20' data-aos='fade-left'>Our History</h1>
 
-        <div className="absolute top-30 left-1/2 transform -translate-x-1/2 w-[4px] h-full bg-[var(--secondary-color)] z-[-1] rounded-4xl animate-move-line"></div>
+        <ScrollLine/>
+        {/* <div className="absolute top-30 left-1/2 transform -translate-x-1/2 w-[4px] h-full bg-[var(--secondary-color)] z-[-1] rounded-4xl" data-aos='move-line'></div> */}
         <div className="flex flex-col gap-4">
           {milestones.map((item, index)=>(
               <div 
                 key={index} 
                 className={`relative flex w-full ${index%2===0?'justify-start':'justify-end'}`}>
-                  {index%2==0?
-                    <LeftIcon className='bg-[var(--primary-color)] text-transparent rounded-full w-10 h-10 absolute left-[47%] md:left-[48.60%]'/>
-                  :<RightIcon className='bg-[var(--primary-color)] text-transparent rounded-full w-10 h-10 absolute right-[47%] md:left-[48.60%]'/>}
+                  <div className={`bg-[var(--primary-color)] text-transparent rounded-full w-10 h-10 absolute ${index%2==0?'left-[47%]':'right-[47%]'} md:left-[48.60%]`} data-aos='zoom-in'></div>
 
-                  <div className={`flex justify-center items-center bg-teal-600/20 backdrop-blur-md border border-teal-500/20 rounded-xl max-w-[450px] w-auto sm:w-[45%] p-4 ${index % 2 === 0 ? 'ml-6':'mr-6'} `}>
+                  <div className={`flex justify-center items-center bg-teal-600/20 backdrop-blur-md border border-teal-500/20 rounded-xl max-w-[450px] w-auto sm:w-[45%] p-4 ${index % 2 === 0 ? 'ml-6':'mr-6'} `} data-aos='fade-down'>
                     <Card text1={item.title} text2={item.description} role={item.year} lr='true'/>
                   </div>
               </div>
