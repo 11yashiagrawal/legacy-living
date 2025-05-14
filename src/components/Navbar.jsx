@@ -7,12 +7,14 @@ import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const [activeLink, setActiveLink]=useState('/');
   const [underlineProps, setUnderlineProps] = useState({ left: 0, width: 0 });
   const containerRef = useRef(null);
+  
 
   useEffect(() => {
     setActiveLink(pathname);
@@ -37,12 +39,12 @@ const Navbar = () => {
   ]
   return (
     <div className='flex w-screen h-[10vh] rounded-b-3xl shadow-xl p-4 pb-0 pr-8 justify-between sticky top-0 z-50 bg-white box-border'>
-      <Link href='/' passHref><Image src='/logo.png' alt='Logo' width={200} height={90} className='cursor-pointer opacity-0' data-aos='zoom-in'/></Link>
+      <Link href='/' passHref><Image src='/logo.png' alt='Logo' width={200} height={90} className='cursor-pointer before:opacity-0' data-aos='zoom-in'/></Link>
 
       <div className='hidden md:flex space-x-20 items-center text-[var(--primary-color)] text-xl h-[100%] relative' ref={containerRef}>
 
         {links.map((link,index)=>(
-          <div key={link.path} className='flex justify-center items-center h-[100%] opacity-0' style={{ animationDelay: `${index * 0.3}s` }} data-aos='fade-down' data-aos-delay={`${index * 300}`} data-path={link.path}>
+          <div key={link.path} className='flex justify-center items-center h-[100%] before:opacity-0' style={{ animationDelay: `${index * 0.3}s` }} data-aos='fade-down' data-aos-delay={`${index * 300}`} data-path={link.path}>
             <Link href={link.path} className='hover:-translate-y-1 hover:border-b-[var(--primary-color)] active:-translate-y-4 active:border-b-3 active:border-b-[var(--primary-color)] duration-300 ease'>{link.label}
             </Link>
           </div>

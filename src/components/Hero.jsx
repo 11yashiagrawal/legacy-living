@@ -8,9 +8,9 @@ const Hero = (props) => {
       <div className="absolute inset-0 bg-teal-100 bg-opacity-10 mix-blend-multiply pointer-events-none rounded-2xl"></div>
       <div className="relative z-10 flex flex-col md:flex-row justify-between items-center h-full md:p-10 p-0 md:gap-10 gap-5">
         <div className="text-white text-center md:text-left md:space-y-6 space-y-3 max-w-2xl">
-          {props.tagline1 && <h1 className='text-6xl md:text-8xl font-bold opacity-0' data-aos='fade-right'>{props.tagline1}</h1>}
-          {props.tagline2 && <h1 className='text-5xl md:text-7xl font-bold pl-6 opacity-0' data-aos='fade-right' data-aos-delay='500'>{props.tagline2}</h1>}
-          {props.tagline3 && <h1 className='text-5xl md:text-7xl font-bold pl-12 opacity-0' data-aos='fade-right' data-aos-delay='1000'>{props.tagline3}</h1>}
+          {props.tagline1 && <h1 className='text-6xl md:text-8xl font-bold before:opacity-0' data-aos='fade-right'>{props.tagline1}</h1>}
+          {props.tagline2 && <h1 className='text-5xl md:text-7xl font-bold pl-6 before:opacity-0' data-aos='fade-right' data-aos-delay='500'>{props.tagline2}</h1>}
+          {props.tagline3 && <h1 className='text-5xl md:text-7xl font-bold pl-12 before:opacity-0' data-aos='fade-right' data-aos-delay='1000'>{props.tagline3}</h1>}
         </div>
 
         {props.form=='true'?
