@@ -8,7 +8,7 @@ import { motion } from 'framer-motion';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
 
-const Navbar = () => {
+const Navbar = ({ onOpenForm }) => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const [activeLink, setActiveLink]=useState('/');
@@ -37,6 +37,9 @@ const Navbar = () => {
     {label:'Properties', path:'/properties'},
     {label:'Blog', path:'/blog'}
   ]
+
+  console.log("Navbar received onOpenForm:", typeof onOpenForm);
+
   return (
     <div className='flex w-screen h-[10vh] rounded-b-3xl shadow-xl p-4 pb-0 pr-8 justify-between sticky top-0 z-50 bg-white box-border'>
       <Link href='/' passHref><Image src='/logo.png' alt='Logo' width={200} height={90} className='cursor-pointer before:opacity-0' data-aos='zoom-in'/></Link>
@@ -77,8 +80,8 @@ const Navbar = () => {
       </div>
 
       <div className='hidden md:flex space-x-4 items-center'>
-        <Button text='Login' bgColor='none' borderColor='border-[var(--primary-color)]' textColor='text-[var(--primary-color)]'/>
-        <Button text='Signup' bgColor='bg-[var(--primary-color)]' borderColor='none' textColor='text-white'/>
+        <Button text='Login' bgColor='none' borderColor='border-[var(--primary-color)]' textColor='text-[var(--primary-color)]' onClick={()=>onOpenForm('login')}/>
+        <Button text='Signup' bgColor='bg-[var(--primary-color)]' borderColor='none' textColor='text-white' onClick={()=>onOpenForm('signup')}/>
       </div>
 
       {isOpen && (
@@ -102,8 +105,8 @@ const Navbar = () => {
               </Link></div>
           ))}
 
-          <Button text='Login' bgColor='none' borderColor='none' textColor='text-[var(--primary-color)]'/>
-          <Button text='Signup' bgColor='bg-[var(--primary-color)]' borderColor='none' textColor='text-white'/>
+          <Button text='Login' bgColor='none' borderColor='none' textColor='text-[var(--primary-color)]' onClick={()=>onOpenForm('login')}/>
+          <Button text='Signup' bgColor='bg-[var(--primary-color)]' borderColor='none' textColor='text-white' onClick={()=>onOpenForm('signup')}/>
         </div>
       )}
     </div>

@@ -1,11 +1,26 @@
+'use client';
 import Hero from '@/components/Hero'
 import React from 'react'
+import FormModal from '@/components/FormModal';
+import Navbar from '@/components/Navbar';
+import { useState } from 'react';
 
 const productspage = () => {
+  const [showForm, setShowForm] = useState(false);
+  const [formType, setFormType] = useState(null);
+  
   return (
-    <div>
+    <>
+      <div className={`${showForm ? 'blur-sm pointer-events-none select-none' : ''}`}>
+          <Navbar className='sticky' onOpenForm={(type) => {
+              console.log("Setting showForm true");
+              setFormType(type);
+              setShowForm(true);
+            }}/>
       <Hero img='/heroimages/properties.jpg' tagline1='Browse Quality' tagline2='Homes for' tagline3='Every Lifestyle.'/>
-    </div>
+      </div>
+      {showForm && formType && <FormModal onClose={() => {setShowForm(false);setFormType(null);}} formType={formType} onSwitchForm={(type) => setFormType(type)}/>}
+    </>
   )
 }
 

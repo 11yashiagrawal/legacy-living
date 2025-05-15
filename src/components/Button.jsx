@@ -1,21 +1,15 @@
 'use client';
 import React from 'react'
-import { useRouter } from 'next/navigation'
-import { useUser } from '@/context/context';
-import { useContext } from 'react';
+// import { useRouter } from 'next/navigation'
 
-const Button = (props) => {
-  const router=useRouter();
-  const {formOpen, setFormOpen}=useUser();
+const Button = ({bgColor, textColor, borderColor, text, onClick}) => {
+  // const router=useRouter();
 
-  const handleClick=()=>{
-    {props.text=='signup'?router.push('/signup'):router.push('/login')}
-    setFormOpen(!formOpen)
-    console.log(formOpen)
-  }
-
+  // const handleClick=()=>{
+  //   {text=='signup'?router.push('/signup'):router.push('/login')}
+  // }
   return (
-    <button className={`${props.bgColor=='none'?"":props.bgColor} ${props.textColor} ${props.borderColor=='none'?"":props.borderColor} border-1 p-4 w-1/2 h-1/2 flex items-center justify-center box-border rounded-md before:opacity-0`} data-aos='zoom-in'onClick={handleClick}>{props.text}</button>
+    <button className={`${bgColor=='none'?"":bgColor} ${textColor} ${borderColor=='none'?"":borderColor} border-1 p-4 w-1/2 h-1/2 flex items-center justify-center box-border rounded-md before:opacity-0`} data-aos='zoom-in'onClick={()=>{console.log('button clicked');onClick();}}>{text}</button>
   )
 }
 
