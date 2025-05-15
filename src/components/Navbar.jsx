@@ -6,6 +6,7 @@ import Button from './Button'
 import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { useUserContext } from '@/context/UserContext';
 
 
 const Navbar = ({ onOpenForm }) => {
@@ -14,6 +15,13 @@ const Navbar = ({ onOpenForm }) => {
   const [activeLink, setActiveLink]=useState('/');
   const [underlineProps, setUnderlineProps] = useState({ left: 0, width: 0 });
   const containerRef = useRef(null);
+  const { fetchData } = useUserContext();
+
+  // useEffect(()=>{
+  //   if(activeLink=='/properties'){
+  //     console.log(pathname);
+  //   }
+  // },[])
   
 
   useEffect(() => {
@@ -48,7 +56,7 @@ const Navbar = ({ onOpenForm }) => {
 
         {links.map((link,index)=>(
           <div key={link.path} className='flex justify-center items-center h-[100%] before:opacity-0' style={{ animationDelay: `${index * 0.3}s` }} data-aos='fade-down' data-aos-delay={`${index * 300}`} data-path={link.path}>
-            <Link href={link.path} className='hover:-translate-y-1 hover:border-b-[var(--primary-color)] active:-translate-y-4 active:border-b-3 active:border-b-[var(--primary-color)] duration-300 ease'>{link.label}
+            <Link href={link.path} className='hover:-translate-y-1 hover:border-b-[var(--primary-color)] active:-translate-y-4 active:border-b-3 active:border-b-[var(--primary-color)] duration-300 ease' onClick={()=>{if(link.path=='/properties'){fetchData()}}}>{link.label}
             </Link>
           </div>
         ))}

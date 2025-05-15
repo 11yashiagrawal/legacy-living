@@ -39,7 +39,7 @@ export const UserProvider = ({ children }) => {
         }
     
         const response = await res.json();
-        console.log(response); // or set it in state
+        // console.log(response); // or set it in state
         const new_=response.data.map((property,index)=>({
             bedrooms: property.bedrooms,
             address: property.displayAddress,
@@ -49,7 +49,7 @@ export const UserProvider = ({ children }) => {
             price: property.price.amount,
             name: property.customer.branchDisplayName.split(',')[0]
         }))
-        setApiData(new_)
+        setApiData([...apidata,new_])
     
       } catch (error) {
         console.error('Error fetching property data:', error);
@@ -58,7 +58,7 @@ export const UserProvider = ({ children }) => {
   }
 
   return (
-    <UserContext.Provider value={{ users, addUser, loginUser, currentUser, apidata }}>
+    <UserContext.Provider value={{ users, addUser, loginUser, currentUser, apidata, fetchData }}>
       {children}
     </UserContext.Provider>
   );

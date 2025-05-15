@@ -4,13 +4,14 @@ import React from 'react'
 import FormModal from '@/components/FormModal';
 import Navbar from '@/components/Navbar';
 import { useState } from 'react';
-import { useContext } from 'react';
 import { useUserContext } from '@/context/UserContext';
-import HoriCaraousel from '@/components/HoriCaraousel';
+import PropertySection from '@/components/PropertySection';
 
 const productspage = () => {
   const [showForm, setShowForm] = useState(false);
   const [formType, setFormType] = useState(null);
+  const { apidata } = useUserContext();
+  console.log(apidata)
   
   return (
     <>
@@ -21,7 +22,8 @@ const productspage = () => {
               setShowForm(true);
             }}/>
           <Hero img='/heroimages/properties.jpg' tagline1='Browse Quality' tagline2='Homes for' tagline3='Every Lifestyle.'/>
-          <HoriCaraousel reason='propertiesPage' heading=''/>
+          <PropertySection properties={apidata}/>
+          
       </div>
       {showForm && formType && <FormModal onClose={() => {setShowForm(false);setFormType(null);}} formType={formType} onSwitchForm={(type) => setFormType(type)}/>}
     </>
