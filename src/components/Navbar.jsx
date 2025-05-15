@@ -86,7 +86,7 @@ const Navbar = ({ onOpenForm }) => {
 
       {isOpen && (
         <div className="absolute top-[10vh] left-0 w-full bg-white shadow-md flex flex-col items-center space-y-4 md:hidden z-10 px-4 py-4" >
-          {links.map((link)=>(
+          {links.map((link,index)=>(
             <div key={link.path} className='flex justify-center items-center h-[100%] w-[100%]' data-aos='fade-down' data-aos-delay={`${index*300}`}>
               <Link href={link.path} className='relative' onClick={() => setActiveLink(link.path)}>{link.label}
                 <motion.div
