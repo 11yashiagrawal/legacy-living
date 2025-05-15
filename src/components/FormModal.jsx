@@ -2,13 +2,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
+import { useUserContext } from '@/context/UserContext';
 
 export default function FormModal({ onClose, formType, onSwitchForm }) {
   const router = useRouter();
-  const [users, setUsers] = useState([]);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  // const [notification, setNotification] = useState('');
+  const { users, addUser, loginUser } = useUserContext();
   const [email, setEmail] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -26,10 +26,9 @@ export default function FormModal({ onClose, formType, onSwitchForm }) {
         return;
       }
 
-      const user = users.find(
-        (user) => user.username === username && user.password === password
-      );
-      if (!user) {
+      const success = loginUser(username, password);
+
+      if (!success) {
         toast.error('Invalid username or password.');
         return;
       }
@@ -52,7 +51,7 @@ export default function FormModal({ onClose, formType, onSwitchForm }) {
         return;
       }
 
-      const existingUser = users.find((user) => user.username === username);
+      const existingUser = users.find((user) => user['username'] === username);
       if (existingUser) {
         toast.error('Username already exists.');
         return;
@@ -63,7 +62,7 @@ export default function FormModal({ onClose, formType, onSwitchForm }) {
       }
       
       
-      setUsers([...users, { 'email': email, 'username': username, 'password': password }]);
+      addUser({ email, username, password });
       toast.success('Signup successful!');
       console.log(users)
       onClose();
