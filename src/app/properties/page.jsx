@@ -3,7 +3,7 @@ import Hero from '@/components/Hero'
 import React from 'react'
 import FormModal from '@/components/FormModal';
 import Navbar from '@/components/Navbar';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useUserContext } from '@/context/UserContext';
 import PropertySection from '@/components/PropertySection';
 
@@ -11,7 +11,12 @@ const productspage = () => {
   const [showForm, setShowForm] = useState(false);
   const [formType, setFormType] = useState(null);
   const { apidata } = useUserContext();
-  console.log(apidata)
+  const [data, setData]=useState([]);
+  useEffect(()=>{
+    // console.log(apidata,'apidata from page');
+    setData(apidata);
+  },[apidata])
+  // console.log(apidata)
   
   return (
     <>
@@ -22,7 +27,8 @@ const productspage = () => {
               setShowForm(true);
             }}/>
           <Hero img='/heroimages/properties.jpg' tagline1='Browse Quality' tagline2='Homes for' tagline3='Every Lifestyle.'/>
-          <PropertySection properties={apidata}/>
+          {apidata.length===0?<>Loading...</>:<PropertySection properties={data}/>}
+          
           
       </div>
       {showForm && formType && <FormModal onClose={() => {setShowForm(false);setFormType(null);}} formType={formType} onSwitchForm={(type) => setFormType(type)}/>}

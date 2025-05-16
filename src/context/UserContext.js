@@ -39,17 +39,22 @@ export const UserProvider = ({ children }) => {
         }
     
         const response = await res.json();
+        // console.log(res);
         // console.log(response); // or set it in state
-        const new_=response.data.map((property,index)=>({
-            bedrooms: property.bedrooms,
-            address: property.displayAddress,
-            displayedPrice: property.price.displayPrices[0].displayPrice,
-            propertyImage: property.propertyImages.mainImageSrc,
-            description: property.summary,
-            price: property.price.amount,
-            name: property.customer.branchDisplayName.split(',')[0]
-        }))
-        setApiData([...apidata,new_])
+        // const new_=response.data.map((property,index)=>({
+        //     bedrooms: property.bedrooms,
+        //     address: property.displayAddress,
+        //     displayedPrice: property.price.displayPrices[0].displayPrice,
+        //     propertyImage: property.propertyImages.mainImageSrc,
+        //     description: property.summary,
+        //     price: property.price.amount,
+        //     name: property.customer.branchDisplayName.split(',')[0]
+        // }))
+        if(response?.data){
+          setApiData(response.data);
+          // console.log(response.data,apidata)
+        }
+        
     
       } catch (error) {
         console.error('Error fetching property data:', error);
