@@ -2,13 +2,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
-import { useUserContext } from '@/context/UserContext';
+import useUserStore from '@/store/userStore';
 
 export default function FormModal({ onClose, formType, onSwitchForm }) {
   const router = useRouter();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const { users, addUser, loginUser } = useUserContext();
+  const { users, addUser, loginUser } = useUserStore();
   const [email, setEmail] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 

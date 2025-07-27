@@ -4,19 +4,24 @@ import React from 'react'
 import FormModal from '@/components/FormModal';
 import Navbar from '@/components/Navbar';
 import { useState, useEffect } from 'react';
-import { useUserContext } from '@/context/UserContext';
+import useUserStore from '@/store/userStore';
 import PropertySection from '@/components/PropertySection';
 
-const productspage = () => {
+const Productspage = () => {
   const [showForm, setShowForm] = useState(false);
   const [formType, setFormType] = useState(null);
-  const { apidata } = useUserContext();
+  const { apidata, fetchData } = useUserStore();
   const [data, setData]=useState([]);
   useEffect(()=>{
-    // console.log(apidata,'apidata from page');
-    setData(apidata);
+    console.log(apidata,'apidata from page');
+    setData(apidata.listings);
   },[apidata])
-  // console.log(apidata)
+
+  useEffect(()=>{
+    fetchData();
+  },[])
+
+  console.log(apidata)
   
   return (
     <>
@@ -27,7 +32,8 @@ const productspage = () => {
               setShowForm(true);
             }}/>
           <Hero img='/heroimages/properties.jpg' tagline1='Browse Quality' tagline2='Homes for' tagline3='Every Lifestyle.'/>
-          {apidata.length===0?<>Loading...</>:<PropertySection properties={data}/>}
+          
+          {apidata.length===0?<>Loading...</>:<PropertySection properties={apidata.listings}/>}
           
           
       </div>
@@ -36,4 +42,4 @@ const productspage = () => {
   )
 }
 
-export default productspage
+export default Productspage

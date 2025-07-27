@@ -9,7 +9,7 @@ import Navbar from '@/components/Navbar';
 import { useEffect, useState } from 'react';
 import 'aos/dist/aos.css';
 
-const homepage = () => {
+const Homepage = () => {
   useEffect(() => {
     const AOS = require('aos'); // Import AOS library
     AOS.init({ duration: 1000, once: false }); // Initialize AOS with optional settings
@@ -47,4 +47,4 @@ const homepage = () => {
   )
 }
 
-export default homepage
+export default Homepage

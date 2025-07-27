@@ -1,35 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import Card from './Card';
+import PropertyModal from './PropertyModal';
 import { AnimatePresence, motion } from 'framer-motion';
 
 const PropertySection = ({properties}) => {
-    // const arr=[]
-    // for (let i = 0; i + 6 <= properties.length; i += 6) {
-    //     arr.push(
-    //       <div key={i} className="grid grid-cols-3 gap-4 mb-8">
-    //         {properties.slice(i, i + 6).map((property, index) => (
-    //           <Card img={property.propertyImage} text1={property.name} text2={property.description} />
-    //         ))}
-    //       </div>
-    //     );
-    //   }
-    
-    // const remaining = properties.length % 6;
-    // if (remaining !== 0) {
-    //     const startIndex = properties.length - remaining;
-    //     arr.push(
-    //       <div key="remaining" className="grid grid-cols-3 gap-4 mb-8">
-    //         {properties.slice(startIndex).map((property, index) => (
-    //           <Card img={property.propertyImage} text1={property.name} text2={property.description} />
-    //         ))}
-    //       </div>
-    //     );
-    //   }
-    
+      
     console.log(properties, 'properties from property section');
     const [arr,setArr]=useState([])
+    const [selectedProperty, setSelectedProperty] = useState(null);
+    const [showModal, setShowModal] = useState(false);
+    
     useEffect(()=>{
-      setArr(properties)
+      setArr(properties.regular)
     },[properties])
 
     const cardsPerPage = 6;
@@ -44,34 +26,65 @@ const PropertySection = ({properties}) => {
       setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1));
     };
 
+    const handleCardClick = (property) => {
+      setSelectedProperty(property);
+      setShowModal(true);
+    };
+
+    const handleCloseModal = () => {
+      setShowModal(false);
+      setSelectedProperty(null);
+    };
+
     const currentCards = arr.slice(
       currentPage * cardsPerPage,
       currentPage * cardsPerPage + cardsPerPage
     );
 
   return (
-    <div className='grid grid-cols-[auto_1fr_auto] items-stretch p-5 space-x-1.5'>
-      <div className='flex items-center justify-center text-4xl font-bold bg-teal-500/20 text-white rounded-md shadow-2xl w-[5vw] h-[8vh] place-self-center'>
-          <button onClick={handlePrev} disabled={currentPage === 0}>{`<`}</button>
+    <>
+      <div className='grid grid-cols-[auto_1fr_auto] items-stretch p-5 space-x-1.5'>
+        <div className='flex items-center justify-center text-4xl font-bold bg-teal-500/20 text-white rounded-md shadow-2xl w-[5vw] h-[8vh] place-self-center'>
+            <button onClick={handlePrev} disabled={currentPage === 0}>{`<`}</button>
+        </div>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentPage} // triggers re-animation on page change
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -50 }}
+            transition={{ duration: 0.4 }}
+            className="grid gap-8 grid-cols-[repeat(auto-fit,_minmax(400px,_1fr))] place-content-center ml-10 mt-10"
+          >
+            {currentCards.map((p,i)=>{
+              return (
+                <Card 
+                  img={p.imageUris[0]} 
+                  text1={p.title} 
+                  text2={p.description}
+                  property={p}
+                  onCardClick={handleCardClick}
+                  key={`${currentPage}-${i}`}
+                />
+              )
+            })}
+          </motion.div>
+        </AnimatePresence>
+        <div className='flex items-center justify-center text-4xl font-bold bg-teal-500/20 text-white rounded-md shadow-2xl w-[5vw] h-[8vh] place-self-center'>
+            <button onClick={handleNext} disabled={currentPage === totalPages - 1}>{`>`}</button>
+        </div>
       </div>
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={currentPage} // triggers re-animation on page change
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -50 }}
-          transition={{ duration: 0.4 }}
-          className="grid gap-8 grid-cols-[repeat(auto-fit,_minmax(400px,_1fr))] place-content-center ml-10 mt-10"
-        >
-          {currentCards.map((p,i)=>{
-            return (<Card img={p.propertyImages.mainImageSrc} text1={p.customer.branchDisplayName.split(',')[0]} text2={p.summary} role={p.price.displayPrices[0].displayPrice} key={`${currentPage}-${i}`}/>)
-          })}
-        </motion.div>
+
+      {/* Property Modal */}
+      <AnimatePresence>
+        {showModal && selectedProperty && (
+          <PropertyModal 
+            property={selectedProperty} 
+            onClose={handleCloseModal} 
+          />
+        )}
       </AnimatePresence>
-      <div className='flex items-center justify-center text-4xl font-bold bg-teal-500/20 text-white rounded-md shadow-2xl w-[5vw] h-[8vh] place-self-center'>
-          <button onClick={handleNext} disabled={currentPage === totalPages - 1}>{`>`}</button>
-      </div>
-    </div>
+    </>
   )
 
 }
