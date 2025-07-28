@@ -1,0 +1,53 @@
+{
+  "team": [
+    {
+      "img": "/team/aaravmehta.jpg",
+      "text1": "Aarav Mehta",
+      "role": "Chief Executive Officer (CEO)",
+      "text2": "Aarav brings over 15 years of experience in real estate consulting and tech entrepreneurship. A Harvard Business School alum, he envisioned Legacy Living as a bridge between digital innovation and luxury property access. His strategic leadership drives the company’s vision and partnerships.",
+      "key": 1
+    },
+    {
+      "img": "/team/nainakapoor.jpg",
+      "text1": "Naina Kapoor",
+      "role": "Chief Operating Officer (COO)",
+      "text2": "With a background in operations management from INSEAD and a decade at global real estate firms, Naina ensures seamless execution of daily operations. She specializes in scaling real estate ventures efficiently and oversees compliance, legal, and team dynamics at Legacy Living.",
+      "key": 2
+    },
+    {
+      "img": "/team/rishivarma.jpg",
+      "text1": "Rishi Varma",
+      "role": "Chief Technology Officer (CTO)",
+      "text2": "Rishi is a full-stack developer and product strategist with over 12 years in proptech startups. He’s the architect of Legacy Living’s platform—leading backend scalability, user experience design, and AI integrations that personalize property recommendations for users.",
+      "key": 3
+    },
+    {
+      "img": "/team/sanadsouza.jpg",
+      "text1": "Sana D’Souza",
+      "role": "Head of Marketing",
+      "text2": "Sana blends storytelling with data to craft impactful marketing strategies. Formerly with a leading digital agency, she’s scaled user growth for several lifestyle brands. At Legacy Living, she manages branding, paid campaigns, and content to build trust and awareness.",
+      "key": 4
+    },
+    {
+      "img": "/team/ishaanroy.jpg",
+      "text1": "Ishaan Roy",
+      "role": "Director of Product",
+      "text2": "With dual degrees in design and computer science, Ishaan has a strong product intuition. He leads the UI/UX and product roadmap for Legacy Living, ensuring a frictionless and elegant user experience for both property seekers and sellers.",
+      "key": 5
+    },
+    {
+      "img": "/team/meherchaudhary.jpg",
+      "text1": "Meher Chaudhary",
+      "role": "Lead Real Estate Analyst",
+      "text2": "Meher is a data-driven real estate analyst with deep insights into market trends, pricing models, and buyer psychology. With a master’s in Urban Planning, she helps curate top-tier listings and maintains the quality and accuracy of property data across the platform.",
+      "key": 6
+    },
+    {
+      "img": "/team/kabirmalhotra.jpg",
+      "text1": "Kabir Malhotra",
+      "role": "Customer Experience Manager",
+      "text2": "Kabir has spent 8+ years in customer success roles across the tech and hospitality sectors. Known for his empathy and problem-solving skills, he leads Legacy Living’s support team and ensures every client’s journey is smooth, informed, and memorable.",
+      "key": 7
+    }
+  ]
+}

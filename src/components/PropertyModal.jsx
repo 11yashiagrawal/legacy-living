@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { XMarkIcon, MapPinIcon, CurrencyPoundIcon, BuildingOfficeIcon, ChevronLeftIcon, ChevronRightIcon, HomeIcon, PhoneIcon } from '@heroicons/react/24/outline';
+import { XMarkIcon, MapPinIcon, ChevronLeftIcon, ChevronRightIcon, HomeIcon, PhoneIcon, BookmarkIcon } from '@heroicons/react/24/outline';
 
 const PropertyModal = ({ property, onClose }) => {
   if (!property) return null;
@@ -9,6 +9,7 @@ const PropertyModal = ({ property, onClose }) => {
   console.log('Property data:', property);
   
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isBookmarked, setIsBookmarked] = useState(false);
   
   // Debug: Log the property structure to see available image fields
   console.log('Property image fields:', {
@@ -26,24 +27,6 @@ const PropertyModal = ({ property, onClose }) => {
   console.log('Processed images:', images);
   console.log('Total images:', totalImages);
 
-  const formatPrice = (price) => {
-    if (!price) return 'Price on request';
-    return new Intl.NumberFormat('en-GB', {
-      style: 'currency',
-      currency: 'GBP',
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    }).format(price);
-  };
-
-  const formatDate = (dateString) => {
-    if (!dateString) return 'N/A';
-    return new Date(dateString).toLocaleDateString('en-GB', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
-  };
 
   // Helper function to safely render property values
   const safeRender = (value) => {
@@ -52,25 +35,59 @@ const PropertyModal = ({ property, onClose }) => {
     return String(value);
   };
 
-  // Helper function to get location string
-  const getLocationString = (property) => {
-    if (property.location) return safeRender(property.location);
-    if (property.address) return safeRender(property.address);
-    if (property.coordinates) {
-      const coords = property.coordinates;
-      if (typeof coords === 'object' && coords.latitude && coords.longitude) {
-        return `${coords.latitude}, ${coords.longitude}`;
-      }
-    }
-    return 'Location not available';
-  };
-
   const nextImage = () => {
     setCurrentImageIndex((prev) => (prev + 1) % totalImages);
   };
 
   const prevImage = () => {
     setCurrentImageIndex((prev) => (prev - 1 + totalImages) % totalImages);
+  };
+
+  // Check if property is bookmarked on component mount and when property changes
+  useEffect(() => {
+    const checkBookmarkStatus = () => {
+      const bookmarkedProperties = JSON.parse(localStorage.getItem('bookmarkedProperties') || '[]');
+      const isCurrentlyBookmarked = bookmarkedProperties.some(p => p.id === property.id);
+      setIsBookmarked(isCurrentlyBookmarked);
+    };
+
+    // Check initial status
+    checkBookmarkStatus();
+
+    // Listen for storage changes (when other modals bookmark/unbookmark)
+    const handleStorageChange = () => {
+      checkBookmarkStatus();
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    window.addEventListener('bookmarkChange', handleStorageChange); // Custom event for same-window updates
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('bookmarkChange', handleStorageChange);
+    };
+  }, [property.id, property]);
+
+  // Bookmark functionality
+  const toggleBookmark = () => {
+    const bookmarkedProperties = JSON.parse(localStorage.getItem('bookmarkedProperties') || '[]');
+    
+    if (isBookmarked) {
+      // Remove from bookmarks
+      const updatedBookmarks = bookmarkedProperties.filter(p => p.id !== property.id);
+      localStorage.setItem('bookmarkedProperties', JSON.stringify(updatedBookmarks));
+      setIsBookmarked(false);
+    } else {
+      // Add to bookmarks
+      const updatedBookmarks = [...bookmarkedProperties, property];
+      localStorage.setItem('bookmarkedProperties', JSON.stringify(updatedBookmarks));
+      setIsBookmarked(true);
+    }
+    
+    // Trigger custom event to update other components in the same window
+    window.dispatchEvent(new Event('bookmarkChange'));
+    // Also trigger storage event for cross-tab synchronization
+    window.dispatchEvent(new Event('storage'));
   };
 
   // Keyboard navigation and body scroll prevention
@@ -256,9 +273,9 @@ const PropertyModal = ({ property, onClose }) => {
               </div>
             </div>
 
-            {/* Agent Phone Number */}
-            {property.agent && property.agent.phone && (
-              <div className="mt-6 p-4 rounded-lg">
+            {/* Agent Phone Number and Bookmark */}
+            <div className="mt-6 p-4 rounded-lg flex items-center justify-between">
+              {property.agent && property.agent.phone && (
                 <div className="flex items-center gap-3">
                   <PhoneIcon className="w-5 h-5 text-teal-600" />
                   <div>
@@ -266,8 +283,21 @@ const PropertyModal = ({ property, onClose }) => {
                     <p className="text-lg font-semibold text-teal-800">{safeRender(property.agent.phone)}</p>
                   </div>
                 </div>
-              </div>
-            )}
+              )}
+              
+              {/* Bookmark Button */}
+              <button
+                onClick={toggleBookmark}
+                className={`rounded-full p-3 transition-colors ${
+                  isBookmarked 
+                    ? 'bg-white text-teal-800' 
+                    : 'bg-white text-teal-600 hover:text-teal-800'
+                }`}
+                title={isBookmarked ? 'Remove from bookmarks' : 'Add to bookmarks'}
+              >
+                <BookmarkIcon className={`w-6 h-6 ${isBookmarked ? 'fill-current' : ''}`} />
+              </button>
+            </div>
           </div>
         </div>
           

@@ -1,0 +1,46 @@
+{
+  "featuredProp": [
+    {
+      "img": "/featuredProp/home1.jpg",
+      "text1": "The Haven",
+      "text2": "A peaceful sanctuary nestled away from the city's chaos.",
+      "key": 1
+    },
+    {
+      "img": "/featuredProp/home2.jpg",
+      "text1": "Maple Retreat",
+      "text2": "Charming and cozy, surrounded by lush maple trees.",
+      "key": 2
+    },
+    {
+      "img": "/featuredProp/home3.jpg",
+      "text1": "Sunset Villa",
+      "text2": "Enjoy golden hour views from every room in this hilltop villa.",
+      "key": 3
+    },
+    {
+      "img": "/featuredProp/home4.jpg",
+      "text1": "Oakwood Residence",
+      "text2": "Elegant living with timeless oak finishes and modern comforts.",
+      "key": 4
+    },
+    {
+      "img": "/featuredProp/home5.jpg",
+      "text1": "The Nest",
+      "text2": "A compact and cozy home perfect for new beginnings.",
+      "key": 5
+    },
+    {
+      "img": "/featuredProp/home6.jpg",
+      "text1": "Serenity Heights",
+      "text2": "Luxury living above the skyline with unmatched tranquility.",
+      "key": 6
+    },
+    {
+      "img": "/featuredProp/home7.jpg",
+      "text1": "Crystal Cove",
+      "text2": "A coastal gem where ocean breezes and modern elegance meet in perfect harmony.",
+      "key": 7
+    }
+  ]
+}

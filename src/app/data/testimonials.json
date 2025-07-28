@@ -1,0 +1,46 @@
+{
+  "testimonials": [
+    {
+      "img": "/testimonials/aaravmehta.jpg",
+      "text1": "Aarav Mehta",
+      "text2": "\"Finding my perfect rental was effortless. The filters made it easy to narrow down exactly what I needed.\"",
+      "key": 1
+    },
+    {
+      "img": "/testimonials/nishaverma.jpg",
+      "text1": "Nisha Verma",
+      "text2": "\"I loved being able to bookmark listings and come back later. It made comparing homes so much easier!\"",
+      "key": 2
+    },
+    {
+      "img": "/testimonials/kabirshah.jpg",
+      "text1": "Kabir Shah",
+      "text2": "\"The platform is clean, intuitive, and fast. I found a great apartment with all the amenities I wanted.\"",
+      "key": 3
+    },
+    {
+      "img": "/testimonials/priyanair.jpg",
+      "text1": "Priya Nair",
+      "text2": "\"The user reviews helped me avoid a few bad options. This platform really feels like it has been built for renters.\"",
+      "key": 4
+    },
+    {
+      "img": "/testimonials/rahulkapoor.jpg",
+      "text1": "Rahul Kapoor",
+      "text2": "\"I moved cities recently, and this was my go-to tool. I could search by price, location, and type—all in one place.\"",
+      "key": 5
+    },
+    {
+      "img": "/testimonials/snehadesai.jpg",
+      "text1": "Sneha Desai",
+      "text2": "\"Very impressed with how organized and detailed each listing is. I found exactly what I was looking for!\"",
+      "key": 6
+    },
+    {
+      "img": "/testimonials/adityarao.jpg",
+      "text1": "Aditya Rao",
+      "text2": "\"No more jumping between apps and brokers. Everything I needed was right here.\"",
+      "key": 7
+    }
+  ]
+}

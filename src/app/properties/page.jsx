@@ -32,7 +32,7 @@ const Productspage = () => {
               setFormType(type);
               setShowForm(true);
             }}/>
-          <div className="w-full max-w-7xl mx-auto px-2 md:px-4">
+          <div className="w-full px-2 md:px-0">
             <Hero img='/heroimages/properties.jpg' tagline1='Browse Quality' tagline2='Homes for' tagline3='Every Lifestyle.'/>
             
             <div className="mt-16 md:mt-24">

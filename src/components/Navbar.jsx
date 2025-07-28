@@ -43,6 +43,7 @@ const Navbar = ({ onOpenForm }) => {
   const links=[{label:'Home', path:'/'},
     {label:'About', path:'/about'},
     {label:'Properties', path:'/properties'},
+    {label:'Bookmarked', path:'/bookmarked'},
     {label:'Blog', path:'/blog'}
   ]
 
