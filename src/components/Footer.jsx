@@ -7,7 +7,7 @@ const Footer = () => {
   const Instagram=iconMap['instagram']
   const Linkedin=iconMap['linkedin']
   return (
-    <div className='mt-20 bg-[var(--primary-color)] flex flex-wrap justify-center p-20 gap-80 pb-5 bottom-0 w-screen pr-0 mr-0' data-aos='fade-down'>
+    <div className='mt-20 bg-[var(--primary-color)] flex flex-wrap justify-center p-4 md:p-20 gap-8 md:gap-20 lg:gap-80 pb-5 bottom-0 w-full' data-aos='fade-down'>
       <div className='text-center'>
         <p className='text-white font-bold'>Quick Links</p> <br/><br/>
         <Link href='/about' className='text-teal-400'>About Us</Link><br/>
