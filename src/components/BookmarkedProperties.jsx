@@ -90,7 +90,7 @@ const BookmarkedProperties = () => {
             className="grid gap-4 md:gap-8 grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-content-center w-full px-2 md:px-6"
           >
             {bookmarkedProperties.map((property, index) => (
-              <div key={property.id} className="relative group">
+              <div key={property.id || `bookmark-${index}`} className="relative group">
                 <Card 
                   img={property.imageUris?.[0]} 
                   text1={property.title} 
